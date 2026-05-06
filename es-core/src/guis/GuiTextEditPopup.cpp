@@ -2,6 +2,7 @@
 
 #include "components/ButtonComponent.h"
 #include "components/MenuComponent.h"
+#include "components/OnScreenKeyboard.h"
 #include "components/TextEditComponent.h"
 
 GuiTextEditPopup::GuiTextEditPopup(Window* window, const std::string& title, const std::string& initValue,
