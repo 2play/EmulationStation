@@ -57,17 +57,17 @@ void OnScreenKeyboard::render(const Transform4x4f& parentTrans)
     }
 }
 
-void OnScreenKeyboard::onInput(const InputCompactEvent& event)
+void OnScreenKeyboard::onInput(Input input)
 {
     int cols = 9;
     int rows = (mKeys.size() + cols - 1) / cols;
 
-    if (event.down) {
-        if (event.key == SDLK_LEFT) cursorX = (cursorX + cols - 1) % cols;
-        if (event.key == SDLK_RIGHT) cursorX = (cursorX + 1) % cols;
-        if (event.key == SDLK_UP) cursorY = (cursorY + rows - 1) % rows;
-        if (event.key == SDLK_DOWN) cursorY = (cursorY + 1) % rows;
-        if (event.key == SDLK_RETURN) {
+    if (input.value) { // pressed
+        if (input.id == SDLK_LEFT) cursorX = (cursorX + cols - 1) % cols;
+        if (input.id == SDLK_RIGHT) cursorX = (cursorX + 1) % cols;
+        if (input.id == SDLK_UP) cursorY = (cursorY + rows - 1) % rows;
+        if (input.id == SDLK_DOWN) cursorY = (cursorY + 1) % rows;
+        if (input.id == SDLK_RETURN) {
             int idx = cursorY * cols + cursorX;
             if (idx < (int)mKeys.size()) {
                 std::string key = mKeys[idx];
