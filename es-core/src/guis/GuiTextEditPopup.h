@@ -5,6 +5,7 @@
 #include "components/ComponentGrid.h"
 #include "components/NinePatchComponent.h"
 #include "GuiComponent.h"
+#include "components/OnScreenKeyboard.h"
 
 class TextComponent;
 class TextEditComponent;
@@ -26,6 +27,7 @@ private:
 	std::shared_ptr<TextComponent> mTitle;
 	std::shared_ptr<TextEditComponent> mText;
 	std::shared_ptr<ComponentGrid> mButtonGrid;
+	std::shared_ptr<OnScreenKeyboard> mKeyboard;
 
 	bool mMultiLine;
 };
