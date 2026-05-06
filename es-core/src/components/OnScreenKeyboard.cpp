@@ -53,9 +53,13 @@ void OnScreenKeyboard::render(const Transform4x4f& parentTrans)
         if ((int)(i % cols) == cursorX && (int)(i / cols) == cursorY)
             color = 0x00FF00FF; // highlight cursor
 
-        font->renderText(mWindow, mKeys[i], x, y, color);
+        // Build a text cache and draw it
+        TextCache* cache = font->buildTextCache(mKeys[i], x, y, color);
+        font->renderTextCache(cache);
+        delete cache;
     }
 }
+
 
 bool OnScreenKeyboard::input(InputConfig* config, Input input)
 {
