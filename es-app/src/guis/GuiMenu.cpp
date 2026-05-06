@@ -398,6 +398,14 @@ void GuiMenu::openUISettings()
 	s->addWithLabel("DISABLE START MENU IN KID MODE", disable_start);
 	s->addSaveFunc([disable_start] { Settings::getInstance()->setBool("DisableKidStartMenu", disable_start->getState()); });
 
+	// onscreen keyboard toggle
+	auto onscreen_keyboard = std::make_shared<SwitchComponent>(mWindow);
+	onscreen_keyboard->setState(Settings::getInstance()->getBool("UseOnScreenKeyboard"));
+	s->addWithLabel("USE ON-SCREEN KEYBOARD", onscreen_keyboard);
+	s->addSaveFunc([onscreen_keyboard] {
+	    Settings::getInstance()->setBool("UseOnScreenKeyboard", onscreen_keyboard->getState());
+	});
+
 	mWindow->pushGui(s);
 
 }
