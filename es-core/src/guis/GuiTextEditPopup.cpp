@@ -4,6 +4,7 @@
 #include "components/MenuComponent.h"
 #include "components/OnScreenKeyboard.h"
 #include "components/TextEditComponent.h"
+#include "Settings.h"
 
 GuiTextEditPopup::GuiTextEditPopup(Window* window, const std::string& title, const std::string& initValue,
 	const std::function<void(const std::string&)>& okCallback, bool multiLine, const char* acceptBtnText)
@@ -71,7 +72,7 @@ bool GuiTextEditPopup::input(InputConfig* config, Input input)
     // --- Sync onscreen keyboard ---
     if(mKeyboard) {
         // Forward input events to the keyboard
-        mKeyboard->onInput(input);
+        mKeyboard->input(config, input);
 
         // Update the TextEditComponent with keyboard text
         mText->setValue(mKeyboard->getText());
