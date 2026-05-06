@@ -29,6 +29,11 @@ GuiTextEditPopup::GuiTextEditPopup(Window* window, const std::string& title, con
 	mGrid.setEntry(mText, Vector2i(0, 1), true, false, Vector2i(1, 1), GridFlags::BORDER_TOP | GridFlags::BORDER_BOTTOM);
 	mGrid.setEntry(mButtonGrid, Vector2i(0, 2), true, false);
 
+	if (Settings::getInstance()->getBool("UseOnScreenKeyboard")) {
+        mKeyboard = std::make_shared<OnScreenKeyboard>(mWindow);
+        addChild(mKeyboard.get());
+    }
+	
 	float textHeight = mText->getFont()->getHeight();
 	if(multiLine)
 		textHeight *= 6;
