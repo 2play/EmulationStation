@@ -57,17 +57,18 @@ void OnScreenKeyboard::render(const Transform4x4f& parentTrans)
     }
 }
 
-void OnScreenKeyboard::onInput(Input input)
+bool OnScreenKeyboard::input(InputConfig* config, Input input)
 {
     int cols = 9;
     int rows = (mKeys.size() + cols - 1) / cols;
 
-    if (input.value) { // pressed
-        if (input.id == SDLK_LEFT) cursorX = (cursorX + cols - 1) % cols;
-        if (input.id == SDLK_RIGHT) cursorX = (cursorX + 1) % cols;
-        if (input.id == SDLK_UP) cursorY = (cursorY + rows - 1) % rows;
-        if (input.id == SDLK_DOWN) cursorY = (cursorY + 1) % rows;
-        if (input.id == SDLK_RETURN) {
+    if (input.value) {
+        if (config->isMappedTo("left", input))  cursorX = (cursorX + cols - 1) % cols;
+        if (config->isMappedTo("right", input)) cursorX = (cursorX + 1) % cols;
+        if (config->isMappedTo("up", input))    cursorY = (cursorY + rows - 1) % rows;
+        if (config->isMappedTo("down", input))  cursorY = (cursorY + 1) % rows;
+
+        if (config->isMappedTo("a", input)) { // “A” button = select
             int idx = cursorY * cols + cursorX;
             if (idx < (int)mKeys.size()) {
                 std::string key = mKeys[idx];
@@ -84,7 +85,13 @@ void OnScreenKeyboard::onInput(Input input)
                 }
             }
         }
+
+        if (config->isMappedTo("b", input)) {
+            // Optional: handle “B” button as cancel/back
+            return false; 
+        }
     }
+    return true;
 }
 
 std::string OnScreenKeyboard::getText() const
