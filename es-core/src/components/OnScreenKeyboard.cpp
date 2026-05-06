@@ -1,5 +1,5 @@
 #include "OnScreenKeyboard.h"
-#include "Renderer.h"
+#include "renderers/Renderer.h"
 #include "resources/Font.h"
 
 OnScreenKeyboard::OnScreenKeyboard(Window* window)
