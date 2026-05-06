@@ -53,7 +53,7 @@ void OnScreenKeyboard::render(const Transform4x4f& parentTrans)
         if ((int)(i % cols) == cursorX && (int)(i / cols) == cursorY)
             color = 0x00FF00FF; // highlight cursor
 
-        font->drawText(mKeys[i], x, y, color);
+        font->renderText(mWindow, mKeys[i], x, y, color);
     }
 }
 
