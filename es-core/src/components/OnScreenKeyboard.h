@@ -10,7 +10,7 @@ public:
     OnScreenKeyboard(Window* window);
 
     void render(const Transform4x4f& parentTrans) override;
-    void onInput(Input input); // adapted for ES input events
+    bool input(InputConfig* config, Input input) override; // adapted for ES input events
     std::string getText() const;
 
 private:
