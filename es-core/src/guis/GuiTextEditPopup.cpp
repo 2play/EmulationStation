@@ -58,17 +58,27 @@ void GuiTextEditPopup::onSizeChanged()
 
 bool GuiTextEditPopup::input(InputConfig* config, Input input)
 {
-	if(GuiComponent::input(config, input))
-		return true;
+    if(GuiComponent::input(config, input))
+        return true;
 
-	// pressing back when not text editing closes us
-	if(config->isMappedTo("b", input) && input.value)
-	{
-		delete this;
-		return true;
-	}
+    // pressing back when not text editing closes us
+    if(config->isMappedTo("b", input) && input.value)
+    {
+        delete this;
+        return true;
+    }
 
-	return false;
+    // --- Sync onscreen keyboard ---
+    if(mKeyboard) {
+        // Forward input events to the keyboard
+        mKeyboard->onInput(input);
+
+        // Update the TextEditComponent with keyboard text
+        mText->setValue(mKeyboard->getText());
+        return true;
+    }
+
+    return false;
 }
 
 std::vector<HelpPrompt> GuiTextEditPopup::getHelpPrompts()
